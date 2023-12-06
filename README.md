@@ -1,64 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Sistema de reserva de Hoteles
 
-## About Laravel
+Este es un sistema para realizar reservas en hoteles y tener las funciones necesarias para la creación, modificación de hoteles y sus reservas dentro del sistema
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requerimientos para correr el proyecto localmente
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    1. Tener composer instalado
+    2. Tener instalado algún manejador de 
+        paquete de node puede ser npm ó yarn
+    3. Tener alguna herramienta que permita configurar
+        servidor de bases de datos, apache entre otros
+        pueden descargar xampp, laragon etc
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalación de dependencias para ejecutar el proyecto
 
-## Laravel Sponsors
+    1. abrir una terminal cmd o bash de linux
+    2. acceder a la ubicación del proyecto 
+ 
+ Procedemos a ejecutar unas series de comandos para
+ instalar las dependencias
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+  composer install
+```
 
-### Premium Partners
+luego instalamos todas las dependencias de nodejs que 
+necesita nuestro con el siguiente comando:
+```bash
+  npm install
+```
+ en este punto ya tenemos todas las dependencias instaladas
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    
+## Configurar bases de datos
 
-## Contributing
+Primeramente debemos clonar el archivo .env.example y
+renombrarlo por .env, luego de eso procedemos a modificar las siguientes variables de entorno.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`DB_CONNECTION`
 
-## Code of Conduct
+`DB_HOST`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+`DB_PORT`
 
-## Security Vulnerabilities
+`DB_DATABASE`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+`DB_USERNAME`
 
-## License
+`DB_PASSWORD`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+una vez usted haya configurado su servidor de bases de datos y haya modificado las variables de entorno, 
+procedemos a correr las migraciones de las tablas configuradoel siguiente comando
+
+```bash
+  php artisan migrate
+```
+## Compilar Assets
+ Para poder compilar los assets (css, js, sass) necesitamos correr el siguiente comando
+
+ ```bash
+  npm run dev
+```
+
+si usted quiere modificar el proyecto y no quiere compilar cada ves que realice un cambio usted puede ejecutar 
+
+```bash
+  npm run watch
+```
+## Ejecutar el servidor de laravel
+
+Para correr el proyecto con laravel debe ejecutar el siguiente comando:
+
+```bash
+  php artisan serve
+```
+
+## Sugerencias
+
+cuando haya llegado a este punto usted ya ha sido capaz de correr el proyecto y para esto si usted quiere seguir trabajando en este repositorio le recomendamos trabajar de la siguiente manera:
+
+1. abrir una terminal para ejecutar 
+```bash
+  npm run watch
+```
+2. abrir una segunda terminal para ejecutar laravel con el siguiente comando
+```bash
+  php artisan serve
+```
+
+antes de haber hecho esto, usted ha devido de iniciar el servidor de mysql y el de apache
