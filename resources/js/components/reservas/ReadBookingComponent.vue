@@ -85,8 +85,23 @@
             onMounted(getBookings)
             
             const updateStatusBooking = async(id, status) => {
-                await editStatusBooking(id, status)
-                await getBookings()
+
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "La reserva cambiará a estado " + status,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, Confirmar!"
+                }).then(async(result) => {
+                    if(result.isConfirmed) {
+                        await editStatusBooking(id, status)
+                        await getBookings()
+                    }
+                }); 
+
+                
             }
             
             

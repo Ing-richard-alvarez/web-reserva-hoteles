@@ -22,8 +22,22 @@ export default function useHotels() {
     const storeHotel = async( data ) => {
         errors.value = ''
         try {
+
+            //call service to create hotel 
             await axios.post('/api/hotels', data)
+
+            //show modal
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro Creado exitosamente!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            //redirect to index
             await router.push({name: 'hotel.index'})
+
         } catch(e) {
             if(e.response.status === 422) {
                 errors.value = e.response.data.errors
@@ -35,8 +49,21 @@ export default function useHotels() {
     const updateHotel = async( id ) => {
         errors.value = ''
         try {
+            // service to update hotel
             await axios.put('/api/hotels/' + id, hotel.value)
+            
+            //show modal
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro Actualizado exitosamente!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            //redirect to index
             await router.push({name: 'hotel.index'})
+
         } catch(e) {
             if(e.response.status === 422) {
                 errors.value = e.response.data.errors

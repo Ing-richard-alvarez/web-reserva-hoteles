@@ -23,8 +23,22 @@ export default function useBookings() {
     const storeBooking = async( data ) => {
         errors.value = ''
         try {
+
+            //call service to create booking
             await axios.post('/api/bookings', data)
+
+            //show modal
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro Creado exitosamente!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            //redirect to index booking 
             await router.push({name: 'booking.index'})
+
         } catch(e) {
             if(e.response.status === 422) {
                 errors.value = e.response.data.errors
@@ -36,8 +50,22 @@ export default function useBookings() {
     const updateBooking = async( id ) => {
         errors.value = ''
         try {
+
+            //service to update booking
             await axios.put('/api/bookings/' + id, booking.value)
+
+            //show modal
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro Actualizado exitosamente!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            //redirect to index booking
             await router.push({name: 'booking.index'})
+
         } catch(e) {
             if(e.response.status === 422) {
                 errors.value = e.response.data.errors
