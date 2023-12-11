@@ -46,7 +46,7 @@
                         <td class="d-flex justify-content-around">
                             <button class="btn btn-sm btn-danger" @click="deleteHotels(item.id)">Eliminar</button>
                             <router-link :to="{ name: 'hotel.update', params: {id: item.id} }" class="btn btn-primary btn-sm">Editar</router-link>
-                            <button class="btn btn-sm btn-primary ml-1" @click="deleteHotels(item.id)">Ver detalle</button>
+                            <button class="btn btn-sm btn-primary ml-1" @click="">Ver detalle</button>
                         </td>
                     </tr>
                     
@@ -60,26 +60,36 @@
 <script>
     import useHotels from "../../composables/hotels";
     import { onMounted } from "vue"
-
+    
     export default {
-
+    
         setup() {
 
             const { hotels, getHotels, destroyHotel } = useHotels()
 
             onMounted(getHotels)
 
-            const deleteHotels = async (id) => {
-                if(!window.confirm("Estas seguro?")){
-                    return 
-                }
+            const deleteHotels = async(id) => {
 
-                await destroyHotel(id)
-                await getHotels()
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Estas pronto a eliminar este registro",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, Confirmar!"
+                }).then(async(result) => {
+                    if(result.isConfirmed) {
+                        await destroyHotel(id)
+                        await getHotels()
+                    }
+                }); 
             }
 
             return {
                 hotels,
+                getHotels,
                 deleteHotels
             }
         }
